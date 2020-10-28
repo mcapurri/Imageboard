@@ -1,10 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-</head>
-<body>
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-</body>
+    <head>
+        <title>My Imageboard</title>
+        <link rel="shortcut icon" href="#">        <!-- <link rel="icon" type="image/png" href="http://example.com/myicon.png"> -->
+        <link rel="stylesheet" href="/css/styles.css" />
+        <!-- <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet"> -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap"
+            rel="stylesheet"
+        />
+        <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Imageboard</h1>
+        <!-- <img src="../favicon.ico" id="favicon" width="16" height="16">  -->
+        
+        <div id="main" >
+
+            <modal-popup v-if="imageId" 
+                    :image-id="imageId"
+                    ref="popup"
+                    @close="closeMe"
+                    @update="changeModal"
+                    @remove="removeComment"
+                    @delete="deleteAll"
+                    
+                    >
+            </modal-popup>
+             <!-- RENDERING COMPONENT in "say-greeting" we need to pass the image id so that we can query all the info from the db -->
+            <!-- (don't forget the : before "say-greeting" because the field hello will be dynamic  -->
+            
+            <form class="form-container">
+                <div id="row">
+                    <input
+                        v-model="title"
+                        class="input"
+                        type="text"
+                        name="title"
+                        placeholder="title"
+                    />
+                    <input
+                        v-model="description"
+                        class="input"
+                        type="text"
+                        name="description"
+                        placeholder="description"
+                    />
+                    <input
+                        v-model="username"
+                        class="input"
+                        type="text"
+                        name="username"
+                        placeholder="username"
+                    />
+                </div>
+                
+                <div id="otherrow">
+
+                    <label for="customFile">
+                        <!-- <img src="upload.ico" id="upload" /> -->
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                        </svg>
+                    </label>
+
+                    <input
+                        @change="handleChange"
+                        type="file"
+                        name="file"
+                        id="selectedFile"
+                        accept="image/*"
+                        class="inputfile"
+                    />
+                    
+                    <button @click="handleClick">Submit</button>
+                </div>
+            </form>
+        <!-- This container is for our Vue instance! -->
+        <!-- It will have access to our Vue code. -->
+            <div class="grid-container" @scroll="handleScroll">
+                    <a
+                        :href="'#'+image.id"
+                        v-for="image in images"
+                        class="card"
+                    >
+                        <img class="img" :src="image.url" />
+                        <p>{{image.title.toUpperCase()}}</p>
+                    </a>
+                </div>
+        </div>
+        <script id="template" type="text/x-template">
+            <div class="darkened" >
+                <div v-if="imageId" class="modal" >
+                    <div @click="closeModal" class="close">X</div>
+                    <div class="imgModal-container">
+                        <div class="imgModal-box">
+                            <img class="imgModal" :src="url">
+                        </div>
+                        <div class="modalCard"> 
+                            <div class="imgModal-card">
+                                <p class="title-card">{{title}}</p>
+                                <p class="descr-card">{{description}}</p>
+                                <p class="username-card">Posted by: {{username}}</p>
+                                <p class="deleteImg" @click="deleteImage"> <ion-icon name="trash"></ion-icon> Delete</p>
+                            </div>
+                            <div class="arrows">
+                                <div v-if="prevId" @click="previousImage" ><</div>
+                                <div v-if="nextId" @click="nextImage">></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comments-container">
+                        <form id="commentBox">
+                            <p class="add-a-comment">Add a comment</p>
+                            <div class="commentInput">
+                                <input v-model="commentUsername" class="input" type="text" name="username" placeholder="username" autocomplete="off"/>
+                                <input v-model="commentField" class="input" id="comment" type="text" name="comment" placeholder="comment" autocomplete="off"/>
+                            </div>
+                            
+                            <button @click="submitComment" :disabled="!commentField || !commentUsername">Submit</button>
+                        </form>
+                        
+                        <div class="commentList">
+                            <ul v-if="comments.length" v-for="comment in comments" :key="comment.id" class="comment-row">
+                                <li >
+                                        <p>{{comment.username}} says: {{comment.comment}} {{comment.created_at}}  </p>
+                                        <div @click="deleteComment(comment.id)" class="deleteBtn">
+                                            <ion-icon name="trash"></ion-icon>
+                                        </div>
+                                    
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script src="/js/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!-- <script src="/js/axios.min.js"></script> -->
+        <!-- ORDER MATTERS! make sure script.js goes last -->
+        <script src="/js/script.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    </body>
 </html>

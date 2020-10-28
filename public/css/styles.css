@@ -1,0 +1,313 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+}
+body {
+    background-color: silver;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: auto;
+    overflow: auto;
+}
+h1 {
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 60px;
+    margin-left: 10%;
+    margin-top: 20px;
+    color: whitesmoke;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 50px;
+    width: 550px;
+    height: 150px;
+}
+.input {
+    width: 150px;
+    height: 20px;
+    margin: 5px 5px 5px 10px;
+}
+#upload {
+    width: 100px;
+}
+#row {
+    margin-top: 10px;
+}
+#otherrow {
+    display: flex;
+    /* justify-content: space-evenly; */
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.bi {
+    margin-right: 5px;
+    cursor: pointer;
+}
+button {
+    justify-self: end;
+    background-color: whitesmoke;
+}
+.card {
+    display: flex;
+    width: 250px;
+    height: 250px;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 50px 40px;
+    /* margin-right: 0; */
+    text-decoration: none;
+    color: whitesmoke;
+}
+img {
+    width: 100%;
+    height: 80%;
+    margin-top: 0;
+}
+
+.darkened {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.744);
+}
+.modal {
+    background-color: crimson;
+    height: 90%;
+    width: 70%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    position: fixed;
+    top: 15px;
+    left: 15%;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: 2px solid black;
+}
+
+.imgModal-container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50%;
+    width: 100%;
+    color: blanchedalmond;
+}
+.imgModal-box {
+    width: 250px;
+    height: 100%;
+    margin-top: 30px;
+}
+.imgModal {
+    object-fit: scale-down;
+}
+.modalCard {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+.imgModal-card {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    margin-top: 30px;
+    margin-left: 15px;
+}
+.arrows {
+    height: 20%;
+    font-size: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+.title-card {
+    font-family: "Sansita Swashed", cursive;
+    font-size: 30px;
+    color: blanchedalmond;
+}
+.descr-card {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: blanchedalmond;
+}
+.username-card {
+    font-size: 13px;
+    color: blanchedalmond;
+}
+.deleteImg {
+    color: blanchedalmond;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.close {
+    color: blanchedalmond;
+    margin-right: 10px;
+    height: 20px;
+    text-align: end;
+}
+.close:hover {
+    cursor: pointer;
+}
+
+#commentBox {
+    margin-left: 60px;
+}
+.commentInput {
+    display: flex;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+}
+.commentList {
+    width: 85%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    /* align-self: flex-start; */
+    /* align-items: flex-start; */
+    margin-left: 60px;
+    margin-top: 5px;
+    overflow: scroll;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    color: blanchedalmond;
+}
+
+p {
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-right: 5px;
+    font-size: 20px;
+}
+.comment {
+    /* width: 80%; */
+    /* align-self: center; */
+    min-height: 5px;
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+.add-a-comment {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: blanchedalmond;
+}
+
+button {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 850px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+    .imgModal-box {
+        width: 150px;
+    }
+    .arrows {
+        font-size: 25px;
+    }
+    .title-card {
+        font-size: 25px;
+    }
+    .descr-card {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 13px;
+    }
+    .add-a-comment {
+        font-size: 15px;
+    }
+    .commentList {
+        width: 80%;
+    }
+    #commentField {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .comment {
+        font-size: 12px;
+    }
+    button {
+        width: 80px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .title-card {
+        font-size: 20px;
+    }
+
+    #commentBox {
+        margin-left: 40px;
+    }
+    .input {
+        width: 100px;
+        height: 15px;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    button {
+        width: 50px;
+        font-size: 10px;
+        margin-left: 0;
+    }
+    .commentList {
+        margin-left: 30px;
+    }
+    p {
+        font-size: 15px;
+    }
+    .modal {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+    }
+    .imgModal-container {
+        flex-direction: column;
+        height: 80%;
+    }
+    .modalCard {
+        width: 80%;
+    }
+    .imgModal-card {
+        margin-top: 0;
+    }
+    .imgModal-box {
+        width: 90%;
+        margin-top: 30px;
+    }
+    .title-card {
+        width: 90%;
+    }
+    .descr-card {
+        width: 90%;
+    }
+}
