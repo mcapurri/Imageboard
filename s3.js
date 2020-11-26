@@ -21,7 +21,7 @@ exports.upload = (req, res, next) => {
     const { filename, mimetype, size, path } = req.file;
 
     s3.putObject({
-        Bucket: "spicedling",
+        Bucket: "sapienssapiens",
         ACL: "public-read",
         Key: filename,
         Body: fs.createReadStream(path),
@@ -36,7 +36,6 @@ exports.upload = (req, res, next) => {
             next();
         })
         .catch((err) => {
-            // uh oh
             console.log(err);
             res.sendStatus(500);
         });
