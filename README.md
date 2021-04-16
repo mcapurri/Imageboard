@@ -1,6 +1,6 @@
 ## Imageboard
 
-The app allows the users to upload images on the board and commenting them
+The app allows the users to upload images on the board and to comment them
 
 
 ## Technologies used:
