@@ -4,7 +4,7 @@ The app allows the users to upload images on the board and commenting them
 
 
 ## Technologies used:
-Node.js, Express, Vue.js, PostgreSQL, S3
+Node.js, Express, Vue.js, PostgreSQL, AWS S3
 
 
 ## Author
