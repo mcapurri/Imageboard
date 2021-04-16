@@ -18,5 +18,3 @@ Creative Commons License - see the [LICENSE.md](LICENSE.md) file for
 details
 
 
-# Bugs:
-# - Page loads doubles of pics when scrolling
