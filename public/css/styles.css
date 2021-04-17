@@ -4,6 +4,16 @@
 }
 body {
     background-color: silver;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#main {
+    background-color: silver;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .grid-container {
     display: grid;
@@ -130,7 +140,7 @@ img {
     cursor: pointer;
 }
 .title-card {
-    font-family: "Sansita Swashed", cursive;
+    font-family: 'Sansita Swashed', cursive;
     font-size: 30px;
     color: blanchedalmond;
 }
